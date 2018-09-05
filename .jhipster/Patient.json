@@ -1,0 +1,50 @@
+{
+    "name": "Patient",
+    "fields": [
+        {
+            "fieldName": "patientId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "firstName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        },
+        {
+            "fieldName": "dob",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contactInfo",
+            "otherEntityName": "contactInfo",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "patient"
+        }
+    ],
+    "changelogDate": "20180905082645",
+    "entityTableName": "patient",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "patient",
+    "applications": "*",
+    "microserviceName": "patient"
+}

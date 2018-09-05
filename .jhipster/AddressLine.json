@@ -1,0 +1,45 @@
+{
+    "name": "AddressLine",
+    "fields": [
+        {
+            "fieldName": "streetOrHouseNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "zipCode",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "contactInfo",
+            "otherEntityName": "contactInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "location",
+            "otherEntityName": "location",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "addressLine"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180905082648",
+    "entityTableName": "address_line",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "patient",
+    "applications": "*",
+    "microserviceName": "patient"
+}

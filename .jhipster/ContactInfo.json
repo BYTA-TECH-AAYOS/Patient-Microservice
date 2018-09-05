@@ -1,0 +1,43 @@
+{
+    "name": "ContactInfo",
+    "fields": [
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phoneNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "websiteURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "facebookURL",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "twitterURL",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "addressLines",
+            "otherEntityName": "addressLine",
+            "otherEntityRelationshipName": "contactInfo"
+        }
+    ],
+    "changelogDate": "20180905082646",
+    "entityTableName": "contact_info",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "patient",
+    "applications": "*",
+    "microserviceName": "patient"
+}

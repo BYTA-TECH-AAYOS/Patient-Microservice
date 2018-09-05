@@ -1,0 +1,32 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.bytatech.ayoos.patient"
+    },
+    "jhipsterVersion": "5.3.0",
+    "applicationType": "microservice",
+    "baseName": "patient",
+    "packageName": "com.bytatech.ayoos.patient",
+    "packageFolder": "com/bytatech/ayoos/patient",
+    "serverPort": "8085",
+    "authenticationType": "oauth2",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NzViOGVmMWNiNTFhZTRmODZlZmRiZWQzNmFkZTAxNTdhMGIzMTkzMTM2NzM3NGFmY2QwZGQ1MDZlZjVjMjEwNDI5NDA2MTNjNzc2MmU2MzNkM2IwY2M4NWUwZDc5ZTI5MWNjMTkzZmRiYzY1NjI1ZmYyYmI5OWEyYzZhOGNlNjU=",
+    "enableTranslation": false,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

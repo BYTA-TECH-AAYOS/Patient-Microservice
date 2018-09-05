@@ -1,0 +1,64 @@
+entity Patient{
+	patientId String,
+	firstName String,
+	lastName String,
+	image ImageBlob,
+	dob LocalDate,
+	gender String
+}
+
+entity ContactInfo{
+
+	email String,
+	phoneNumber String,
+	websiteURL String,
+	facebookURL String,
+	twitterURL String
+}
+entity Location{
+	latitude Double,
+	longitude Double
+}
+
+entity AddressLine{
+	streetOrHouseNumber String,
+	zipCode String
+}
+
+entity Country{
+	code String,
+	name String,
+	phonecode Integer
+}
+
+entity State{
+	name String
+}
+
+entity City{
+	name String
+}
+
+relationship OneToOne{
+	Patient{contactInfo} to ContactInfo,
+	AddressLine{location} to Location
+    
+}
+
+relationship OneToMany{
+	ContactInfo {addressLines} to AddressLine,
+    Country{states} to State,
+    State{cities} to City
+    
+}
+
+relationship ManyToOne{
+	AddressLine{country} to Country
+}
+
+
+paginate * with pagination
+
+dto * with mapstruct
+
+service all with serviceImpl
