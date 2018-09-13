@@ -39,6 +39,21 @@ entity City{
 	name String
 }
 
+entity MedicalRecords
+{
+  diseaseName String
+}
+
+entity MedicalReference
+{
+  reference String
+}
+
+entity Note
+{
+  description String
+}
+
 relationship OneToOne{
 	Patient{contactInfo} to ContactInfo,
 	AddressLine{location} to Location
@@ -48,7 +63,10 @@ relationship OneToOne{
 relationship OneToMany{
 	ContactInfo {addressLines} to AddressLine,
     Country{states} to State,
-    State{cities} to City
+    State{cities} to City,
+	MedicalRecords{notes} to Note,
+	Patient{medicalRecords} to MedicalRecords,
+	MedicalRecords{medicalReferences} to MedicalReference
     
 }
 

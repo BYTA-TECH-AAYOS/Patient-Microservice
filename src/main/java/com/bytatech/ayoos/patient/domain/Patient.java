@@ -1,11 +1,14 @@
 package com.bytatech.ayoos.patient.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -47,6 +50,9 @@ public class Patient implements Serializable {
     @OneToOne
     @JoinColumn(unique = true)
     private ContactInfo contactInfo;
+
+    @OneToMany(mappedBy = "patient")
+    private Set<MedicalRecords> medicalRecords = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -159,6 +165,31 @@ public class Patient implements Serializable {
 
     public void setContactInfo(ContactInfo contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    public Set<MedicalRecords> getMedicalRecords() {
+        return medicalRecords;
+    }
+
+    public Patient medicalRecords(Set<MedicalRecords> medicalRecords) {
+        this.medicalRecords = medicalRecords;
+        return this;
+    }
+
+    public Patient addMedicalRecords(MedicalRecords medicalRecords) {
+        this.medicalRecords.add(medicalRecords);
+        medicalRecords.setPatient(this);
+        return this;
+    }
+
+    public Patient removeMedicalRecords(MedicalRecords medicalRecords) {
+        this.medicalRecords.remove(medicalRecords);
+        medicalRecords.setPatient(null);
+        return this;
+    }
+
+    public void setMedicalRecords(Set<MedicalRecords> medicalRecords) {
+        this.medicalRecords = medicalRecords;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

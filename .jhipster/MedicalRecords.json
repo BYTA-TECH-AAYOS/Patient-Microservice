@@ -1,0 +1,39 @@
+{
+    "name": "MedicalRecords",
+    "fields": [
+        {
+            "fieldName": "diseaseName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "patient",
+            "otherEntityName": "patient",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "notes",
+            "otherEntityName": "note",
+            "otherEntityRelationshipName": "medicalRecords"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "medicalReferences",
+            "otherEntityName": "medicalReference",
+            "otherEntityRelationshipName": "medicalRecords"
+        }
+    ],
+    "changelogDate": "20180913072156",
+    "entityTableName": "medical_records",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "patient",
+    "applications": "*",
+    "microserviceName": "patient"
+}

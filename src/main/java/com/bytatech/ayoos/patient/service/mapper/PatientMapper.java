@@ -15,6 +15,7 @@ public interface PatientMapper extends EntityMapper<PatientDTO, Patient> {
     PatientDTO toDto(Patient patient);
 
     @Mapping(source = "contactInfoId", target = "contactInfo")
+    @Mapping(target = "medicalRecords", ignore = true)
     Patient toEntity(PatientDTO patientDTO);
 
     default Patient fromId(Long id) {

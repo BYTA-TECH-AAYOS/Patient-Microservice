@@ -35,6 +35,12 @@
             "otherEntityField": "id",
             "ownerSide": true,
             "otherEntityRelationshipName": "patient"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "medicalRecords",
+            "otherEntityName": "medicalRecords",
+            "otherEntityRelationshipName": "patient"
         }
     ],
     "changelogDate": "20180905082645",
