@@ -42,7 +42,7 @@ ribbon:
         enabled: true
 feign:
     hystrix:
-        enabled: true
+        enabled: false
 #    client:
 #        config:
 #            default:
@@ -122,7 +122,7 @@ security:
     oauth2:
         client:
            client-id: internal
-           client-secret: 6ebdd07c-187f-4a96-a90b-1a04dad7e6d3
+           client-secret: internal
         resource:
            user-info-uri: https://kcnew.bytatech.com:8443/auth/realms/ayoos/protocol/openid-connect/userinfo
 
