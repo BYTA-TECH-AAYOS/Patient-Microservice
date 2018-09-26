@@ -1,23 +1,22 @@
 package com.bytatech.ayoos.patient.service.impl;
 
-import com.bytatech.ayoos.patient.service.StateService;
-import com.bytatech.ayoos.patient.domain.State;
-import com.bytatech.ayoos.patient.repository.StateRepository;
-import com.bytatech.ayoos.patient.repository.search.StateSearchRepository;
-import com.bytatech.ayoos.patient.service.dto.StateDTO;
-import com.bytatech.ayoos.patient.service.mapper.StateMapper;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.bytatech.ayoos.patient.domain.State;
+import com.bytatech.ayoos.patient.repository.StateRepository;
+import com.bytatech.ayoos.patient.repository.search.StateSearchRepository;
+import com.bytatech.ayoos.patient.service.StateService;
+import com.bytatech.ayoos.patient.service.dto.StateDTO;
+import com.bytatech.ayoos.patient.service.mapper.StateMapper;
 
 /**
  * Service Implementation for managing State.
@@ -111,4 +110,10 @@ public class StateServiceImpl implements StateService {
         return stateSearchRepository.search(queryStringQuery(query), pageable)
             .map(stateMapper::toDto);
     }
+
+	@Override
+	public Page<StateDTO> findAllByCountry_name(String name, Pageable pageable) {
+		log.debug("Request to get all States by by country name");
+        return stateRepository.findAllByCountry_name(name, pageable).map(stateMapper::toDto);
+	}
 }

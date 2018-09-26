@@ -1,12 +1,10 @@
 package com.bytatech.ayoos.patient.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.bytatech.ayoos.patient.service.CityService;
-import com.bytatech.ayoos.patient.web.rest.errors.BadRequestAlertException;
-import com.bytatech.ayoos.patient.web.rest.util.HeaderUtil;
-import com.bytatech.ayoos.patient.web.rest.util.PaginationUtil;
-import com.bytatech.ayoos.patient.service.dto.CityDTO;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,16 +12,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.bytatech.ayoos.patient.service.CityService;
+import com.bytatech.ayoos.patient.service.dto.CityDTO;
+import com.bytatech.ayoos.patient.web.rest.errors.BadRequestAlertException;
+import com.bytatech.ayoos.patient.web.rest.util.HeaderUtil;
+import com.bytatech.ayoos.patient.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing City.
@@ -141,6 +147,21 @@ public class CityResource {
         log.debug("REST request to search for a page of Cities for query {}", query);
         Page<CityDTO> page = cityService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/cities");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /cities : get all the cities.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/cities/findByStateName")
+    @Timed
+    public ResponseEntity<List<CityDTO>> getAllCitiesByStateName(String name, Pageable pageable) {
+        log.debug("REST request to get a page of Cities by State name");
+        Page<CityDTO> page = cityService.findAllByState_name(name, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cities");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

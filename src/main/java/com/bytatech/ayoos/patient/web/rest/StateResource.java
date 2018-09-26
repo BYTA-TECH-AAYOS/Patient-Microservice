@@ -1,12 +1,10 @@
 package com.bytatech.ayoos.patient.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.bytatech.ayoos.patient.service.StateService;
-import com.bytatech.ayoos.patient.web.rest.errors.BadRequestAlertException;
-import com.bytatech.ayoos.patient.web.rest.util.HeaderUtil;
-import com.bytatech.ayoos.patient.web.rest.util.PaginationUtil;
-import com.bytatech.ayoos.patient.service.dto.StateDTO;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -14,16 +12,24 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.bytatech.ayoos.patient.service.StateService;
+import com.bytatech.ayoos.patient.service.dto.StateDTO;
+import com.bytatech.ayoos.patient.web.rest.errors.BadRequestAlertException;
+import com.bytatech.ayoos.patient.web.rest.util.HeaderUtil;
+import com.bytatech.ayoos.patient.web.rest.util.PaginationUtil;
+import com.codahale.metrics.annotation.Timed;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import io.github.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing State.
@@ -141,6 +147,21 @@ public class StateResource {
         log.debug("REST request to search for a page of States for query {}", query);
         Page<StateDTO> page = stateService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/states");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /states : get all the states.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of states in body
+     */
+    @GetMapping("/states/findByCountryName")
+    @Timed
+    public ResponseEntity<List<StateDTO>> getAllStatesByCountryName(String name, Pageable pageable) {
+        log.debug("REST request to get a page of States");
+        Page<StateDTO> page = stateService.findAllByCountry_name(name, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/states");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

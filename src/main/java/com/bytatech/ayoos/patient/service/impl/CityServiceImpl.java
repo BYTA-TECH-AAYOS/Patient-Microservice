@@ -1,23 +1,22 @@
 package com.bytatech.ayoos.patient.service.impl;
 
-import com.bytatech.ayoos.patient.service.CityService;
-import com.bytatech.ayoos.patient.domain.City;
-import com.bytatech.ayoos.patient.repository.CityRepository;
-import com.bytatech.ayoos.patient.repository.search.CitySearchRepository;
-import com.bytatech.ayoos.patient.service.dto.CityDTO;
-import com.bytatech.ayoos.patient.service.mapper.CityMapper;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.Optional;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.bytatech.ayoos.patient.domain.City;
+import com.bytatech.ayoos.patient.repository.CityRepository;
+import com.bytatech.ayoos.patient.repository.search.CitySearchRepository;
+import com.bytatech.ayoos.patient.service.CityService;
+import com.bytatech.ayoos.patient.service.dto.CityDTO;
+import com.bytatech.ayoos.patient.service.mapper.CityMapper;
 
 /**
  * Service Implementation for managing City.
@@ -111,4 +110,18 @@ public class CityServiceImpl implements CityService {
         return citySearchRepository.search(queryStringQuery(query), pageable)
             .map(cityMapper::toDto);
     }
+
+    
+    /**
+     * Get all the cities.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+	@Override
+	public Page<CityDTO> findAllByState_name(String name, Pageable pageable) {
+		log.debug("Request to get all Cities");
+        return cityRepository.findAllByState_name(name, pageable)
+            .map(cityMapper::toDto);
+	}
 }

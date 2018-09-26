@@ -1,11 +1,11 @@
 package com.bytatech.ayoos.patient.service;
 
-import com.bytatech.ayoos.patient.service.dto.CityDTO;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
+import com.bytatech.ayoos.patient.service.dto.CityDTO;
 
 /**
  * Service Interface for managing City.
@@ -53,4 +53,13 @@ public interface CityService {
      * @return the list of entities
      */
     Page<CityDTO> search(String query, Pageable pageable);
+    
+    
+    /**
+     * Get all the cities.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+	Page<CityDTO> findAllByState_name(String name, Pageable pageable);
 }
