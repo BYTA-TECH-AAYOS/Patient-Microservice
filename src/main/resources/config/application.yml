@@ -121,10 +121,10 @@ spring:
 security:
     oauth2:
         client:
-           client-id: internal
-           client-secret: internal
+            client-id: internal
+            client-secret: internal
         resource:
-           user-info-uri: https://kcnew.bytatech.com:8443/auth/realms/ayoos/protocol/openid-connect/userinfo
+            user-info-uri: https://kcnew.bytatech.com:8443/auth/realms/ayoos/protocol/openid-connect/userinfo
 
 server:
     servlet:
